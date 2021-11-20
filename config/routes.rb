@@ -5,11 +5,14 @@ Rails.application.routes.draw do
 
   resources :posts, only: %i[index show new create edit update]
 
-  scope '/admin' do
+  #telling scope that we want to use /admin as a URL prefix
+  #and letting rails know all the included routes will be handled
+  #by controllers in the admin module
+ 
+
+  namespace :admin do 
     resources :stats, only: [:index]
   end
-
-  get '/admin/stats', to: 'stats#index'
 
   root 'posts#index'
 end
